@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 def plot_waveform(audio_path):
 
     # Load audio
-    y, sr = librosa.load(audio_path, sr=None, backend="soundfile")
+    y, sr = librosa.load(wav_path, sr=None)
 
     # Create figure
     fig, ax = plt.subplots(figsize=(10, 3))

@@ -1,22 +1,27 @@
+from pydub import AudioSegment
 import librosa
 import matplotlib.pyplot as plt
 
-
 def plot_waveform(audio_path):
 
-    # Load audio
+    # Original audio ni WAV ki convert chestunnam
+    audio = AudioSegment.from_file(audio_path)
+
+    # WAV file path create chestunnam
+    wav_path = audio_path.rsplit(".", 1)[0] + ".wav"
+
+    # Converted audio ni save chestunnam
+    audio.export(wav_path, format="wav")
+
+    # WAV file ni librosa tho load chestunnam
     y, sr = librosa.load(wav_path, sr=None)
 
-    # Create figure
-    fig, ax = plt.subplots(figsize=(10, 3))
-
-    # Plot waveform
-    ax.plot(y, color="blue")
+    # Waveform plot
+    fig, ax = plt.subplots()
+    ax.plot(y)
 
     ax.set_title("Audio Waveform")
-    ax.set_xlabel("Samples")
+    ax.set_xlabel("Time")
     ax.set_ylabel("Amplitude")
-
-    plt.tight_layout()
 
     return fig
